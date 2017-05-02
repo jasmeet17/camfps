@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     [self logAvailableInputDeviceNames];
-    [self devicesWithTorch];
+    [self devicesWithFlash];
     
 }
 
@@ -52,12 +52,12 @@
 
 }
     
--(void) devicesWithTorch{
+-(void) devicesWithFlash{
     NSLog(@"Log: Devices with torch == == == == == == ==");
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     
     for (AVCaptureDevice *device in devices) {
-        if ([device hasTorch]) {
+        if ([device hasFlash]) {
             NSLog(@"Device with torch name: %@", [device localizedName]);
         }
     }

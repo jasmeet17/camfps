@@ -536,6 +536,7 @@
 				3801A3BE1EB9092B000527C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3801A3BF1EB9092B000527C3 /* Build configuration list for PBXNativeTarget "CamRecTests" */ = {
 			isa = XCConfigurationList;
@@ -544,6 +545,7 @@
 				3801A3C11EB9092B000527C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3801A3C21EB9092B000527C3 /* Build configuration list for PBXNativeTarget "CamRecUITests" */ = {
 			isa = XCConfigurationList;
@@ -552,6 +554,7 @@
 				3801A3C41EB9092B000527C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
