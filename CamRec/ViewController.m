@@ -17,6 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    NSArray *devices = [AVCaptureDevice devices];
+    
+    for (int i=0; i<devices.count ; i++){
+        NSLog(@"name :%@\n\n", devices[i]);
+    }
+
+    
 }
 
 
