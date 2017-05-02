@@ -18,12 +18,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    NSArray *devices = [AVCaptureDevice devices];
-    
-    for (int i=0; i<devices.count ; i++){
-        NSLog(@"name :%@\n\n", devices[i]);
-    }
-
+    [self logAvailableInputDeviceNames];
+    [self devicesWithTorch];
     
 }
 
@@ -32,6 +28,42 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Methods
+    
+-(void) logAvailableInputDeviceNames{
+    NSLog(@"Log: Available devices == == == == == == ==");
+    NSArray *devices = [AVCaptureDevice devices];
+    
+    for (AVCaptureDevice *device in devices) {
+        
+        NSLog(@"Device name: %@", [device localizedName]);
+        
+        if ([device hasMediaType:AVMediaTypeVideo]) {
+            
+            if ([device position] == AVCaptureDevicePositionBack) {
+                NSLog(@"Device position : back");
+            }
+            else {
+                NSLog(@"Device position : front");
+            }
+        }
+    }
+
+}
+    
+-(void) devicesWithTorch{
+    NSLog(@"Log: Devices with torch == == == == == == ==");
+    NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+    
+    for (AVCaptureDevice *device in devices) {
+        if ([device hasTorch]) {
+            NSLog(@"Device with torch name: %@", [device localizedName]);
+        }
+    }
+}
+
+#pragma mark - Actions
 
 - (IBAction)captureSession:(UIButton *)sender {
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
