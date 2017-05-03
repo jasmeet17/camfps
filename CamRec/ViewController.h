@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import "UseMethods.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 
-
+    
 @end
 

@@ -21,29 +21,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tj-bs-7UW">
-                                <rect key="frame" x="136" y="576" width="102" height="62"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5m-sB-CqA">
+                                <rect key="frame" x="136" y="579" width="102" height="68"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="62" id="Z7W-7L-fKV"/>
-                                    <constraint firstAttribute="width" constant="102" id="blg-y7-d8v"/>
+                                    <constraint firstAttribute="width" constant="102" id="tLV-T9-5lj"/>
+                                    <constraint firstAttribute="height" constant="68" id="vGJ-ZJ-eIc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Capture"/>
+                                <state key="normal" title="Video"/>
                                 <connections>
-                                    <action selector="captureSession:" destination="BYZ-38-t0r" eventType="touchUpInside" id="81h-gl-2hl"/>
+                                    <action selector="actionVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rf5-Mf-74J"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="2tj-bs-7UW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UhK-lQ-Pd4"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2tj-bs-7UW" secondAttribute="bottom" constant="29" id="eNl-zP-PV4"/>
+                            <constraint firstItem="S5m-sB-CqA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TyW-q2-8gS"/>
+                            <constraint firstAttribute="bottom" secondItem="S5m-sB-CqA" secondAttribute="bottom" constant="20" symbolic="YES" id="bI9-og-8e7"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+            <point key="canvasLocation" x="-29.600000000000001" y="136.28185907046478"/>
         </scene>
     </scenes>
 </document>

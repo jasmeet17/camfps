@@ -18,6 +18,7 @@
 		3801A3C71EB9094A000527C3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801A3C61EB9094A000527C3 /* AVFoundation.framework */; };
 		3801A3C91EB9094F000527C3 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801A3C81EB9094F000527C3 /* AVKit.framework */; };
 		3801A3CB1EB91151000527C3 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 3801A3CA1EB91151000527C3 /* README.md */; };
+		3801A3CF1EBA6C00000527C3 /* UseMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801A3CE1EBA6C00000527C3 /* UseMethods.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		3801A3C61EB9094A000527C3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3801A3C81EB9094F000527C3 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		3801A3CA1EB91151000527C3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3801A3CD1EBA6C00000527C3 /* UseMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UseMethods.h; sourceTree = "<group>"; };
+		3801A3CE1EBA6C00000527C3 /* UseMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UseMethods.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				3801A3CA1EB91151000527C3 /* README.md */,
+				3801A3CC1EBA6C00000527C3 /* UseMethods */,
 				3801A3911EB9092B000527C3 /* CamRec */,
 				3801A3AB1EB9092B000527C3 /* CamRecTests */,
 				3801A3B61EB9092B000527C3 /* CamRecUITests */,
@@ -157,6 +161,15 @@
 				3801A3C61EB9094A000527C3 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3801A3CC1EBA6C00000527C3 /* UseMethods */ = {
+			isa = PBXGroup;
+			children = (
+				3801A3CD1EBA6C00000527C3 /* UseMethods.h */,
+				3801A3CE1EBA6C00000527C3 /* UseMethods.m */,
+			);
+			path = UseMethods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,6 +311,7 @@
 				3801A39A1EB9092B000527C3 /* ViewController.m in Sources */,
 				3801A3971EB9092B000527C3 /* AppDelegate.m in Sources */,
 				3801A3CB1EB91151000527C3 /* README.md in Sources */,
+				3801A3CF1EBA6C00000527C3 /* UseMethods.m in Sources */,
 				3801A3941EB9092B000527C3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
