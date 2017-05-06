@@ -24,6 +24,15 @@ The preview layer supports three gravity modes that you set using videoGravity:
 ## Settings/Configurations
 1. You need to add the "Privacy - Camera usage description" key to your app’s Info.plist and their usage information, in order to gain access for Camera.
 
+## Camera Sepcifications
+| iPhone 6  | iPhone 6 s                                                    | iphone 7  | iphone 7 plus  |
+|-----------|---------------------------------------------------------------|-----------|----------------|
+|           |  4K video recording at 30 fps                                 |           |                |
+|           |  1080p HD video recording at 30 fps or 60 fps                 |           |                |
+|           |  720p HD video recording at 30 fps                            |           |                |
+|           |  Slo-mo video support for 1080p at 120 fps and 720p at 240 fps|           |                |
+|           |  4K video recording at 30 fps                                 |           |                |
+
 **Note:** 
 1. Media capture does not support simultaneous capture of both the front-facing and back-facing cameras on iOS devices.
 2. To set capture properties on a device, you must first acquire a lock on the device using lockForConfiguration:.

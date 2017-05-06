@@ -74,15 +74,42 @@
     [session commitConfiguration];
 }
 
+-(void) getCurrentActiveFormat:(AVCaptureDevice *) captureDevice{
+    NSLog(@"Current Active format for %@",captureDevice.localizedName);
+    for (AVFrameRateRange *range in captureDevice.activeFormat.videoSupportedFrameRateRanges){
+        NSLog(@"Range : %f",range.maxFrameRate);
+    }
+}
+    
+-(void) getAllFormats:(AVCaptureDevice *) captureDevice{
+    
+    
+    for (AVCaptureDeviceFormat *format in captureDevice.formats) {
+        //format.videoSupportedFrameRateRanges[0]
+        NSLog(@"=====    =====     =====     =====");
+        NSLog(@"captureDevice.localized: %@",captureDevice.localizedName);
+        
+        for (AVFrameRateRange *range in format.videoSupportedFrameRateRanges){
+            NSLog(@"Min Frame Rate:%f",range.minFrameRate);
+            NSLog(@"Max Frame Rate:%f",range.maxFrameRate);
+        }
+    }
+    
+//    for(int i=0; i<captureDevice.formats.count; i++){
+//        NSLog(@"The format at:%d , is:%@",i+1, [captureDevice.formats[i] class]);
+//    }
+}
+
 #pragma mark - Delegates
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
     
-    NSLog(@"On Output %@", captureOutput.description);
+    //NSLog(@"On Output %@", captureOutput.description);
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didDropSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
-    NSLog(@"On Drop %@", captureOutput.description);
+    
+    //NSLog(@"On Drop %@", captureOutput.description);
 }
     
 #pragma mark - Actions
@@ -93,6 +120,8 @@
 
     // Create and Configure the Device and Device Input
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    //[self getCurrentActiveFormat:device];
+    [self getAllFormats:device];
     
     NSError *error = nil;
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
@@ -134,10 +163,6 @@
     }];
 
     
-    CALayer *viewLayer = self.view.layer;
-    
-    AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-    [viewLayer addSublayer:captureVideoPreviewLayer];
     
     // add preview layer
     dispatch_async(dispatch_get_main_queue(), ^{
