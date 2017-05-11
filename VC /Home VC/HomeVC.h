@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "UseMethods.h"
 
-@interface ViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface HomeVC : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 
     
 @end
