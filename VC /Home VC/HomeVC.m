@@ -21,6 +21,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
     [self logAvailableInputDeviceNames];
     [self devicesWithFlash];
     [self.navigationController.navigationBar setHidden:YES];
@@ -28,11 +30,38 @@
 
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    //Hide the Navigation Bar
+    self.title = @"";
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+}
+    
+-(void) viewWillDisappear:(BOOL)animated{
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+    
+     #pragma mark - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+     // Get the new view controller using [segue destinationViewController].
+     // Pass the selected object to the new view controller.
+     
+         if ([[segue identifier] isEqualToString:@"FormatDetail"])
+         {
+             // Get reference to the destination view controller
+             FormatDetailVC *detailVC = [segue destinationViewController];
+             
+             // Pass any objects to the view controller here, like...
+             detailVC.device = self.device;
+         }
+         
+     }
 
 #pragma mark - Methods
     
@@ -82,6 +111,7 @@
     NSLog(@"Current Active format for %@",captureDevice.localizedName);
     NSLog(@"captureDevice.formatDescription: %@",captureDevice.activeFormat.description);
     NSLog(@"HRSI: %d X %d",captureDevice.activeFormat.highResolutionStillImageDimensions.width,captureDevice.activeFormat.highResolutionStillImageDimensions.height);
+    
     CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(captureDevice.activeFormat.formatDescription);
     NSLog(@"Type used for video dimensions, units are pixels. Dimensions: %d X %d",dimensions.width,dimensions.height);
     
@@ -92,7 +122,8 @@
     
 -(void) getAllFormats:(AVCaptureDevice *) captureDevice{
     
-    
+    NSLog(@"@_@_@_@__@_@_@_@_@_@_@_@__@_@__@_@_");
+
     NSLog(@"captureDevice.localized: %@",captureDevice.localizedName);
 
     for (AVCaptureDeviceFormat *format in captureDevice.formats) {
@@ -100,24 +131,36 @@
         NSLog(@"=====    =====     =====     =====");
         NSLog(@"captureDevice.formatDescription: %@",format.formatDescription);
         
+        NSLog(@"FOrmat :%@",format.mediaType);
         
-        NSLog(@"format.videoMaxZoomFactor: %f",format.videoMaxZoomFactor);
-        NSLog(@"format.minExposureDuration.timescale: %d",format.minExposureDuration.timescale);
-        NSLog(@"format.minExposureDuration.value: %lld",format.minExposureDuration.value);
+        CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(format.formatDescription);
+        NSLog(@"Type used for video dimensions, units are pixels. Dimensions: %d X %d",dimensions.width,dimensions.height);
+
+//        CMVideoDimensions dimensions =
+        //NSLog(@"Codec: %@",CMFormatDescriptionGetMediaSubType(format.formatDescription));
+        
+        NSLog(@"Type used for video dimensions, units are pixels. Dimensions: %d X %d",dimensions.width,dimensions.height);
+
+        
+        NSLog(@"MaxZoomFactor: %f",format.videoMaxZoomFactor);
+        //NSLog(@"format.minExposureDuration.timescale: %d",format.minExposureDuration.timescale);
+        //NSLog(@"format.minExposureDuration.value: %lld",format.minExposureDuration.value);
         NSLog(@"w:%d and h:%d",format.highResolutionStillImageDimensions.width,format.highResolutionStillImageDimensions.height);
         
-        
+        NSLog(@"Max Zoom Factor: %f",format.videoMaxZoomFactor);
+        NSLog(@"Min max iso :%f-%f",format.minISO,format.maxISO);
         
         for (AVFrameRateRange *range in format.videoSupportedFrameRateRanges){
             NSLog(@"Min-Frame Rate:%f Max-Frame Rate:%f",range.minFrameRate, range.maxFrameRate);
             
-            NSLog(@"range.maxFrameDuration.timescale: %d",range.maxFrameDuration.timescale);
-            NSLog(@"range.maxFrameDuration.value: %lld",range.maxFrameDuration.value);
+            //NSLog(@"range.maxFrameDuration.timescale: %d",range.maxFrameDuration.timescale);
+            //NSLog(@"range.maxFrameDuration.value: %lld",range.maxFrameDuration.value);
             
         }
     }
     
     
+    NSLog(@"@_@_@_@__@_@_@_@_@_@_@_@__@_@__@_@_");
 //    for(int i=0; i<captureDevice.formats.count; i++){
 //        NSLog(@"The format at:%d , is:%@",i+1, [captureDevice.formats[i] class]);
 //    }
@@ -164,7 +207,6 @@
 
     // Create and Configure the Device and Device Input
     
-    self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     [self getCurrentActiveFormat:self.device];
     [self getAllFormats:self.device];
     
@@ -221,8 +263,8 @@
             if ( YES == [self.device lockForConfiguration:NULL] )
             {
                 self.device.activeFormat = vFormat;
-                [self.device setActiveVideoMinFrameDuration:CMTimeMake(10,600)];
-                [self.device setActiveVideoMaxFrameDuration:CMTimeMake(10,600)];
+                [self.device setActiveVideoMinFrameDuration:CMTimeMake(10,50)];
+                [self.device setActiveVideoMaxFrameDuration:CMTimeMake(10,50)];
                 [self.device unlockForConfiguration];
                 NSLog(@"formats  %@ %@ %@",vFormat.mediaType,vFormat.formatDescription,vFormat.videoSupportedFrameRateRanges);
             }

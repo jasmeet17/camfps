@@ -20,6 +20,7 @@
 		3801A3CF1EBA6C00000527C3 /* UseMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801A3CE1EBA6C00000527C3 /* UseMethods.m */; };
 		3801A3D61EC3AE16000527C3 /* FormatDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801A3D51EC3AE16000527C3 /* FormatDetailVC.m */; };
 		3801A3DA1EC3AFC9000527C3 /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801A3D91EC3AFC9000527C3 /* HomeVC.m */; };
+		3801A3DD1EC5AA6D000527C3 /* FormatDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801A3DC1EC5AA6D000527C3 /* FormatDetailCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		3801A3D51EC3AE16000527C3 /* FormatDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatDetailVC.m; sourceTree = "<group>"; };
 		3801A3D81EC3AFC9000527C3 /* HomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVC.h; sourceTree = "<group>"; };
 		3801A3D91EC3AFC9000527C3 /* HomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVC.m; sourceTree = "<group>"; };
+		3801A3DB1EC5AA6D000527C3 /* FormatDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FormatDetailCell.h; path = Cell/FormatDetailCell.h; sourceTree = "<group>"; };
+		3801A3DC1EC5AA6D000527C3 /* FormatDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FormatDetailCell.m; path = Cell/FormatDetailCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +183,7 @@
 			children = (
 				3801A3D41EC3AE16000527C3 /* FormatDetailVC.h */,
 				3801A3D51EC3AE16000527C3 /* FormatDetailVC.m */,
+				3801A3DE1EC5AA73000527C3 /* Format Detail Cell */,
 			);
 			name = "Format Detail VC";
 			path = "VC /Format Detail VC";
@@ -194,6 +198,15 @@
 			name = "Home VC";
 			path = "VC /Home VC";
 			sourceTree = SOURCE_ROOT;
+		};
+		3801A3DE1EC5AA73000527C3 /* Format Detail Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3801A3DB1EC5AA6D000527C3 /* FormatDetailCell.h */,
+				3801A3DC1EC5AA6D000527C3 /* FormatDetailCell.m */,
+			);
+			name = "Format Detail Cell";
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -332,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3801A3D61EC3AE16000527C3 /* FormatDetailVC.m in Sources */,
+				3801A3DD1EC5AA6D000527C3 /* FormatDetailCell.m in Sources */,
 				3801A3971EB9092B000527C3 /* AppDelegate.m in Sources */,
 				3801A3CB1EB91151000527C3 /* README.md in Sources */,
 				3801A3DA1EC3AFC9000527C3 /* HomeVC.m in Sources */,

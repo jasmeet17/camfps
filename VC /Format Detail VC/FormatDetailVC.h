@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import "FormatDetailCell.h"
 
-@interface FormatDetailVC : UIViewController
+@interface FormatDetailVC : UIViewController<UITableViewDelegate,UITableViewDataSource>
+
+@property AVCaptureDevice *device;
 
 @end

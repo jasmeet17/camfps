@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "UseMethods.h"
+#import "FormatDetailVC.h"
 
 @interface HomeVC : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 
