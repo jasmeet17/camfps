@@ -11,7 +11,17 @@
 
 #pragma mark - outlets
 @property (weak, nonatomic) IBOutlet UILabel *label_FPS;
+    @property (weak, nonatomic) IBOutlet UISlider *sliderFPS;
+    @property (weak, nonatomic) IBOutlet UILabel *labelCurrentFPS;
+    @property (weak, nonatomic) IBOutlet UILabel *labelMinFPS;
+    @property (weak, nonatomic) IBOutlet UILabel *labelMaxFPS;
+    
 @property AVCaptureDevice *device;
+@property float minFPS;
+@property float maxFPS;
+@property float currentFPS;
+    
+    
 
 @end
 
@@ -27,6 +37,9 @@
     [self devicesWithFlash];
     [self.navigationController.navigationBar setHidden:YES];
     [self getVideoAccess];
+    [self addVideoPreview];
+    [self getCurrentActiveFormat:self.device];
+    [self updateLabels];
 
 }
 
@@ -45,23 +58,23 @@
     // Dispose of any resources that can be recreated.
 }
     
-     #pragma mark - Navigation
+#pragma mark - Navigation
      
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-     // Get the new view controller using [segue destinationViewController].
-     // Pass the selected object to the new view controller.
-     
-         if ([[segue identifier] isEqualToString:@"FormatDetail"])
-         {
-             // Get reference to the destination view controller
-             FormatDetailVC *detailVC = [segue destinationViewController];
-             
-             // Pass any objects to the view controller here, like...
-             detailVC.device = self.device;
-         }
-         
-     }
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+// Get the new view controller using [segue destinationViewController].
+// Pass the selected object to the new view controller.
+
+    if ([[segue identifier] isEqualToString:@"FormatDetail"])
+    {
+        // Get reference to the destination view controller
+        FormatDetailVC *detailVC = [segue destinationViewController];
+        
+        // Pass any objects to the view controller here, like...
+        detailVC.device = self.device;
+    }
+    
+}
 
 #pragma mark - Methods
     
@@ -106,6 +119,12 @@
     
     [session commitConfiguration];
 }
+    
+-(void) updateLabels{
+    self.labelMinFPS.text = [@(self.minFPS) stringValue];
+    self.labelMaxFPS.text = [@(self.maxFPS) stringValue];
+    self.labelCurrentFPS.text = [NSString stringWithFormat:@"Current FPS:%f",self.currentFPS];
+}
 
 -(void) getCurrentActiveFormat:(AVCaptureDevice *) captureDevice{
     NSLog(@"Current Active format for %@",captureDevice.localizedName);
@@ -115,8 +134,23 @@
     CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(captureDevice.activeFormat.formatDescription);
     NSLog(@"Type used for video dimensions, units are pixels. Dimensions: %d X %d",dimensions.width,dimensions.height);
     
+    if (captureDevice.activeVideoMinFrameDuration.timescale ==captureDevice.activeVideoMaxFrameDuration.timescale ){
+        self.currentFPS = captureDevice.activeVideoMaxFrameDuration.timescale;
+    }else{
+        self.currentFPS = 0;
+    }
+    
+//    NSLog(@"1: %d",captureDevice.activeVideoMinFrameDuration.timescale);
+//    NSLog(@"2: %lld",captureDevice.activeVideoMinFrameDuration.value);
+//    NSLog(@"3: %d",captureDevice.activeVideoMaxFrameDuration.timescale);
+//    NSLog(@"4: %lld",captureDevice.activeVideoMaxFrameDuration.value);
+    
+    
     for (AVFrameRateRange *range in captureDevice.activeFormat.videoSupportedFrameRateRanges){
         NSLog(@"Range : %f",range.maxFrameRate);
+        self.minFPS = range.minFrameRate;
+        self.maxFPS = range.maxFrameRate;
+        
     }
 }
     
@@ -199,16 +233,13 @@
     //NSLog(@"On Drop %@", captureOutput.description);
 }
     
-#pragma mark - Actions
-- (IBAction)actionVideo:(UIButton *)sender {
+-(void) addVideoPreview{
     // Create and Configure a Capture Session
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
     session.sessionPreset = AVCaptureSessionPresetMedium;
-
+    
     // Create and Configure the Device and Device Input
     
-    [self getCurrentActiveFormat:self.device];
-    [self getAllFormats:self.device];
     
     NSError *error = nil;
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:&error];
@@ -223,8 +254,8 @@
     [session addOutput:output];
     
     output.videoSettings = @{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
-//    [device setActiveVideoMinFrameDuration:CMTimeMake(1, 15)];
-//    output.minFrameDuration = CMTimeMake(1, 15);
+    //    [device setActiveVideoMinFrameDuration:CMTimeMake(1, 15)];
+    //    output.minFrameDuration = CMTimeMake(1, 15);
     
     
     dispatch_queue_t queue = dispatch_queue_create("MyQueue", NULL);
@@ -233,45 +264,42 @@
     // add preview layer
     dispatch_async(dispatch_get_main_queue(), ^{
         AVCaptureVideoPreviewLayer *newCaptureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-
+        
         CALayer *viewLayer = [self.view layer];
         
         newCaptureVideoPreviewLayer.frame = self.view.bounds;
-                
+        
         [viewLayer addSublayer:newCaptureVideoPreviewLayer];
         
-        [self.view.layer addSublayer:newCaptureVideoPreviewLayer];
+        [self.view.layer insertSublayer:newCaptureVideoPreviewLayer atIndex:0];
         
         [session startRunning];
     });
-    
-    
 }
-
-
+    
+#pragma mark - Actions
     
 - (IBAction)changeFormat:(UIButton *)sender {
     
-    
-    for(AVCaptureDeviceFormat *vFormat in [self.device formats] )
-    {
-        CMFormatDescriptionRef description= vFormat.formatDescription;
-        float maxrate=((AVFrameRateRange*)[vFormat.videoSupportedFrameRateRanges objectAtIndex:0]).maxFrameRate;
-        
-        if(maxrate>59 && CMFormatDescriptionGetMediaSubType(description)==kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
-        {
-            if ( YES == [self.device lockForConfiguration:NULL] )
-            {
-                self.device.activeFormat = vFormat;
-                [self.device setActiveVideoMinFrameDuration:CMTimeMake(10,50)];
-                [self.device setActiveVideoMaxFrameDuration:CMTimeMake(10,50)];
-                [self.device unlockForConfiguration];
-                NSLog(@"formats  %@ %@ %@",vFormat.mediaType,vFormat.formatDescription,vFormat.videoSupportedFrameRateRanges);
-            }
-        }
-    }
-    
-    [self getCurrentActiveFormat:self.device];
+//    for(AVCaptureDeviceFormat *vFormat in [self.device formats] )
+//    {
+//        CMFormatDescriptionRef description= vFormat.formatDescription;
+//        float maxrate=((AVFrameRateRange*)[vFormat.videoSupportedFrameRateRanges objectAtIndex:0]).maxFrameRate;
+//        
+//        if(maxrate>59 && CMFormatDescriptionGetMediaSubType(description)==kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
+//        {
+//            if ( YES == [self.device lockForConfiguration:NULL] )
+//            {
+//                self.device.activeFormat = vFormat;
+//                [self.device setActiveVideoMinFrameDuration:CMTimeMake(1,50)];
+//                [self.device setActiveVideoMaxFrameDuration:CMTimeMake(1,50)];
+//                [self.device unlockForConfiguration];
+//                NSLog(@"formats  %@ %@ %@",vFormat.mediaType,vFormat.formatDescription,vFormat.videoSupportedFrameRateRanges);
+//            }
+//        }
+//    }
+//    
+//    [self getCurrentActiveFormat:self.device];
 }
     
     
