@@ -11,7 +11,7 @@
 #import "UseMethods.h"
 #import "FormatDetailVC.h"
 
-@interface HomeVC : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface HomeVC : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate,SelectedFormat>
 
     
 @end

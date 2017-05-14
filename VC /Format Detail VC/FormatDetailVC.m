@@ -23,6 +23,8 @@
 @end
 
 @implementation FormatDetailVC
+@synthesize delegate;
+
 
     - (void)viewDidLoad {
         [super viewDidLoad];
@@ -48,16 +50,6 @@
             NSLog(@"Format :%@",format[@"format"]);
         }
     }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
     #pragma mark - Methods Ease
     
@@ -123,6 +115,40 @@
 #pragma mark - TableView delegates
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self selectedIndex:(int)indexPath.row];
+    
+}
+
+-(void) selectedIndex:(int) index{
+    
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:[NSString stringWithFormat:@"Selected Format Index :%d",index+1]
+                                 message:[NSString stringWithFormat:@"%@ (Range Min-Max)", [[self.formatDetails objectAtIndex:index] valueForKey:FPS]]
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:@"Yes"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action) {
+                                    [delegate selectedFormatIndex:index];
+                                    [self.navigationController popViewControllerAnimated:YES];
+
+                                }];
+    
+    UIAlertAction* noButton = [UIAlertAction
+                               actionWithTitle:@"No"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   
+                               }];
+    
+    [alert addAction:yesButton];
+    [alert addAction:noButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

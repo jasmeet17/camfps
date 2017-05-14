@@ -21,21 +21,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="30.0 FPS" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYs-4o-41Q">
-                                <rect key="frame" x="84" y="28" width="66" height="14"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgc-IU-UXg">
-                                <rect key="frame" x="9" y="12" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="changeFormat:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fCw-gp-nLe"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="tIm-ck-BIF">
+                                <rect key="frame" x="289" y="138" width="73" height="130.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYs-4o-41Q">
+                                        <rect key="frame" x="34" y="0.0" width="39" height="13.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Format:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9RR-s3-ItH">
+                                        <rect key="frame" x="32.5" y="19.5" width="40.5" height="13.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dimension:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69R-Vn-fz9">
+                                        <rect key="frame" x="14.5" y="39" width="58.5" height="13.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FPS:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xnV-iz-2Eo">
+                                        <rect key="frame" x="49" y="58.5" width="24" height="13.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HRSI" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="98N-MN-bB2">
+                                        <rect key="frame" x="47" y="78" width="26" height="13.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zoom Factor: " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="leF-ya-48v">
+                                        <rect key="frame" x="0.0" y="97.5" width="73" height="13.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ISO" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5EA-uH-CvB">
+                                        <rect key="frame" x="54" y="117" width="19" height="13.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLz-HV-7D3">
                                 <rect key="frame" x="305" y="26" width="57" height="30"/>
                                 <constraints>
@@ -54,21 +86,24 @@
                                     <constraint firstAttribute="height" constant="30" id="KTS-Cu-h9h"/>
                                     <constraint firstAttribute="width" constant="222" id="Qqx-4B-5oQ"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="actionSliderChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="V1h-HH-URA"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current FPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTW-dk-Eia">
-                                <rect key="frame" x="141" y="592" width="93" height="21"/>
+                                <rect key="frame" x="141" y="592.5" width="93" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7d-Yk-I6e">
-                                <rect key="frame" x="306" y="628" width="45" height="21"/>
+                                <rect key="frame" x="306" y="628.5" width="45" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yLA-gy-WtW">
-                                <rect key="frame" x="33" y="628" width="35" height="21"/>
+                                <rect key="frame" x="33.5" y="628.5" width="34.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -79,23 +114,31 @@
                             <constraint firstItem="p3o-B6-08P" firstAttribute="top" secondItem="uTW-dk-Eia" secondAttribute="bottom" constant="10" id="H77-UI-VwM"/>
                             <constraint firstItem="yLA-gy-WtW" firstAttribute="centerY" secondItem="p3o-B6-08P" secondAttribute="centerY" id="Jem-UY-Uny"/>
                             <constraint firstItem="bLz-HV-7D3" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="26" id="Kvg-wL-g2Y"/>
+                            <constraint firstAttribute="trailing" secondItem="tIm-ck-BIF" secondAttribute="trailing" constant="13" id="NSr-qV-HBn"/>
                             <constraint firstItem="uTW-dk-Eia" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aHe-wv-uOn"/>
                             <constraint firstItem="p3o-B6-08P" firstAttribute="leading" secondItem="yLA-gy-WtW" secondAttribute="trailing" constant="8" id="iGI-y3-CPK"/>
                             <constraint firstItem="p3o-B6-08P" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="k7K-bn-whE"/>
                             <constraint firstAttribute="trailing" secondItem="bLz-HV-7D3" secondAttribute="trailing" constant="13" id="kJr-qR-XmD"/>
                             <constraint firstItem="X7d-Yk-I6e" firstAttribute="leading" secondItem="p3o-B6-08P" secondAttribute="trailing" constant="8" id="mds-sT-hYV"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="p3o-B6-08P" secondAttribute="bottom" constant="14" id="oxr-gd-xoz"/>
+                            <constraint firstItem="tIm-ck-BIF" firstAttribute="top" secondItem="bLz-HV-7D3" secondAttribute="bottom" constant="82" id="qiX-mR-8QG"/>
                             <constraint firstItem="X7d-Yk-I6e" firstAttribute="centerY" secondItem="p3o-B6-08P" secondAttribute="centerY" id="yiC-ix-zWj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="81O-ax-lkS"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="detail_labelDevice" destination="ZYs-4o-41Q" id="gqs-7q-hFM"/>
+                        <outlet property="detail_labelDimensions" destination="69R-Vn-fz9" id="gka-XB-sFn"/>
+                        <outlet property="detail_labelFPS" destination="xnV-iz-2Eo" id="c7L-9B-9c4"/>
+                        <outlet property="detail_labelFormat" destination="9RR-s3-ItH" id="B3p-AW-hBU"/>
+                        <outlet property="detail_labelHRSI" destination="98N-MN-bB2" id="SvW-2S-Tyu"/>
+                        <outlet property="detail_labelISO" destination="5EA-uH-CvB" id="DIe-2u-OBO"/>
+                        <outlet property="detail_labelZoom" destination="leF-ya-48v" id="tjm-nm-eOv"/>
                         <outlet property="labelCurrentFPS" destination="uTW-dk-Eia" id="Dl6-LG-hm0"/>
                         <outlet property="labelMaxFPS" destination="X7d-Yk-I6e" id="l3g-3W-Nae"/>
                         <outlet property="labelMinFPS" destination="yLA-gy-WtW" id="Q4W-H5-Uca"/>
-                        <outlet property="label_FPS" destination="ZYs-4o-41Q" id="2SX-fw-4i6"/>
-                        <outlet property="sliderFPS" destination="p3o-B6-08P" id="y7U-cc-0oV"/>
+                        <outlet property="sliderFPS" destination="p3o-B6-08P" id="jDv-1M-uy4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

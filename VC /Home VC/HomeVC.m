@@ -15,13 +15,31 @@
     @property (weak, nonatomic) IBOutlet UILabel *labelCurrentFPS;
     @property (weak, nonatomic) IBOutlet UILabel *labelMinFPS;
     @property (weak, nonatomic) IBOutlet UILabel *labelMaxFPS;
-    
+
+@property (weak, nonatomic) IBOutlet UILabel *detail_labelFormat;
+@property (weak, nonatomic) IBOutlet UILabel *detail_labelDimensions;
+@property (weak, nonatomic) IBOutlet UILabel *detail_labelFPS;
+@property (weak, nonatomic) IBOutlet UILabel *detail_labelHRSI;
+@property (weak, nonatomic) IBOutlet UILabel *detail_labelZoom;
+@property (weak, nonatomic) IBOutlet UILabel *detail_labelISO;
+@property (weak, nonatomic) IBOutlet UILabel *detail_labelDevice;
+
+
 @property AVCaptureDevice *device;
 @property float minFPS;
 @property float maxFPS;
 @property float currentFPS;
+@property NSMutableDictionary *currentFormat;
     
-    
+#define DEVICE @"deviceName"
+#define DESCIPTION @"description"
+#define FORMAT @"format"
+#define DIMENSIONS @"dimensions"
+#define MAXZOOM @"maxzoom"
+#define HRSI @"highResolutionStillImageDimensions"
+#define ISO @"ISO"
+#define FPS @"FPS"
+
 
 @end
 
@@ -32,6 +50,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    self.currentFormat = [[NSMutableDictionary alloc] init];
     
     [self logAvailableInputDeviceNames];
     [self devicesWithFlash];
@@ -40,6 +59,8 @@
     [self addVideoPreview];
     [self getCurrentActiveFormat:self.device];
     [self updateLabels];
+    [self updateCurrentFormatDetails];
+    [self updateUISlider];
 
 }
 
@@ -72,6 +93,7 @@
         
         // Pass any objects to the view controller here, like...
         detailVC.device = self.device;
+        detailVC.delegate = self;
     }
     
 }
@@ -121,84 +143,63 @@
 }
     
 -(void) updateLabels{
-    self.labelMinFPS.text = [@(self.minFPS) stringValue];
-    self.labelMaxFPS.text = [@(self.maxFPS) stringValue];
-    self.labelCurrentFPS.text = [NSString stringWithFormat:@"Current FPS:%f",self.currentFPS];
+    self.labelMinFPS.text = [NSString stringWithFormat:@"%.02f",self.minFPS];
+    self.labelMaxFPS.text = [NSString stringWithFormat:@"%.02f",self.maxFPS];
+    self.labelCurrentFPS.text = [NSString stringWithFormat:@"Current FPS:%.02f",self.currentFPS];
+}
+
+-(void) updateUISlider{
+    [self.sliderFPS setMinimumValue:self.minFPS];
+    [self.sliderFPS setMaximumValue:self.maxFPS];
+    
+    [self.sliderFPS setValue:self.currentFPS];
+    
+}
+
+-(void) updateCurrentFormatDetails{
+    self.detail_labelDevice.text = [self.currentFormat objectForKey:DEVICE];
+    self.detail_labelFormat.text = [self.currentFormat objectForKey:FORMAT];
+    self.detail_labelDimensions.text = [self.currentFormat objectForKey:DIMENSIONS];
+    self.detail_labelZoom.text = [self.currentFormat objectForKey:MAXZOOM];
+    self.detail_labelHRSI.text = [self.currentFormat objectForKey:HRSI];
+    self.detail_labelISO.text = [self.currentFormat objectForKey:ISO];
+    self.detail_labelFPS.text = [self.currentFormat objectForKey:FPS];
+}
+
+
+-(void) changeFPSValue:(float) newValue{
+    if ( YES == [self.device lockForConfiguration:NULL] )
+    {
+        self.device.activeFormat = self.device.activeFormat;
+        [self.device setActiveVideoMinFrameDuration:CMTimeMake(1,newValue)];
+        [self.device setActiveVideoMaxFrameDuration:CMTimeMake(1,newValue)];
+        [self.device unlockForConfiguration];
+    }
 }
 
 -(void) getCurrentActiveFormat:(AVCaptureDevice *) captureDevice{
-    NSLog(@"Current Active format for %@",captureDevice.localizedName);
-    NSLog(@"captureDevice.formatDescription: %@",captureDevice.activeFormat.description);
-    NSLog(@"HRSI: %d X %d",captureDevice.activeFormat.highResolutionStillImageDimensions.width,captureDevice.activeFormat.highResolutionStillImageDimensions.height);
     
     CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(captureDevice.activeFormat.formatDescription);
-    NSLog(@"Type used for video dimensions, units are pixels. Dimensions: %d X %d",dimensions.width,dimensions.height);
-    
-    if (captureDevice.activeVideoMinFrameDuration.timescale ==captureDevice.activeVideoMaxFrameDuration.timescale ){
-        self.currentFPS = captureDevice.activeVideoMaxFrameDuration.timescale;
-    }else{
-        self.currentFPS = 0;
-    }
-    
-//    NSLog(@"1: %d",captureDevice.activeVideoMinFrameDuration.timescale);
-//    NSLog(@"2: %lld",captureDevice.activeVideoMinFrameDuration.value);
-//    NSLog(@"3: %d",captureDevice.activeVideoMaxFrameDuration.timescale);
-//    NSLog(@"4: %lld",captureDevice.activeVideoMaxFrameDuration.value);
-    
+    self.currentFPS = captureDevice.activeVideoMinFrameDuration.timescale;
     
     for (AVFrameRateRange *range in captureDevice.activeFormat.videoSupportedFrameRateRanges){
         NSLog(@"Range : %f",range.maxFrameRate);
         self.minFPS = range.minFrameRate;
         self.maxFPS = range.maxFrameRate;
-        
-    }
-}
-    
--(void) getAllFormats:(AVCaptureDevice *) captureDevice{
-    
-    NSLog(@"@_@_@_@__@_@_@_@_@_@_@_@__@_@__@_@_");
-
-    NSLog(@"captureDevice.localized: %@",captureDevice.localizedName);
-
-    for (AVCaptureDeviceFormat *format in captureDevice.formats) {
-        //format.videoSupportedFrameRateRanges[0]
-        NSLog(@"=====    =====     =====     =====");
-        NSLog(@"captureDevice.formatDescription: %@",format.formatDescription);
-        
-        NSLog(@"FOrmat :%@",format.mediaType);
-        
-        CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(format.formatDescription);
-        NSLog(@"Type used for video dimensions, units are pixels. Dimensions: %d X %d",dimensions.width,dimensions.height);
-
-//        CMVideoDimensions dimensions =
-        //NSLog(@"Codec: %@",CMFormatDescriptionGetMediaSubType(format.formatDescription));
-        
-        NSLog(@"Type used for video dimensions, units are pixels. Dimensions: %d X %d",dimensions.width,dimensions.height);
-
-        
-        NSLog(@"MaxZoomFactor: %f",format.videoMaxZoomFactor);
-        //NSLog(@"format.minExposureDuration.timescale: %d",format.minExposureDuration.timescale);
-        //NSLog(@"format.minExposureDuration.value: %lld",format.minExposureDuration.value);
-        NSLog(@"w:%d and h:%d",format.highResolutionStillImageDimensions.width,format.highResolutionStillImageDimensions.height);
-        
-        NSLog(@"Max Zoom Factor: %f",format.videoMaxZoomFactor);
-        NSLog(@"Min max iso :%f-%f",format.minISO,format.maxISO);
-        
-        for (AVFrameRateRange *range in format.videoSupportedFrameRateRanges){
-            NSLog(@"Min-Frame Rate:%f Max-Frame Rate:%f",range.minFrameRate, range.maxFrameRate);
-            
-            //NSLog(@"range.maxFrameDuration.timescale: %d",range.maxFrameDuration.timescale);
-            //NSLog(@"range.maxFrameDuration.value: %lld",range.maxFrameDuration.value);
-            
-        }
     }
     
+    [self.currentFormat setObject:[NSString stringWithFormat:@"Device: %@",captureDevice.localizedName] forKey:DEVICE];
+    [self.currentFormat setObject:captureDevice.activeFormat.description forKey:DESCIPTION];
+    [self.currentFormat setObject:[NSString stringWithFormat:@"Format :%@",captureDevice.activeFormat.mediaType] forKey:FORMAT];
+    [self.currentFormat setObject:[NSString stringWithFormat:@"Dimensions: %d X %d",dimensions.width,dimensions.height] forKey:DIMENSIONS];
+    [self.currentFormat setObject:[NSString stringWithFormat:@"Max Zoom: %.02f",captureDevice.activeFormat.videoMaxZoomFactor] forKey:MAXZOOM];
+    [self.currentFormat setObject:[NSString stringWithFormat:@"HRSI: %d X %d",captureDevice.activeFormat.highResolutionStillImageDimensions.width,captureDevice.activeFormat.highResolutionStillImageDimensions.height] forKey:HRSI];
+    [self.currentFormat setObject:[NSString stringWithFormat:@"ISO: %.02f - %.02f",captureDevice.activeFormat.minISO,captureDevice.activeFormat.maxISO] forKey:ISO];
+    [self.currentFormat setObject:[NSString stringWithFormat:@"FPS: %.02f - %.02f",self.minFPS,self.maxFPS] forKey:FPS];
     
-    NSLog(@"@_@_@_@__@_@_@_@_@_@_@_@__@_@__@_@_");
-//    for(int i=0; i<captureDevice.formats.count; i++){
-//        NSLog(@"The format at:%d , is:%@",i+1, [captureDevice.formats[i] class]);
-//    }
 }
+    
+
 
 -(void) getVideoAccess{
     // Starting and Stopping Recording
@@ -222,6 +223,27 @@
 }
     
 #pragma mark - Delegates
+#pragma mark - SelectedFormat Delegate
+-(void) selectedFormatIndex:(int) formatIndex{
+    [self changeFormat:formatIndex];
+}
+
+-(void) changeFormat:(int) formatIndex{
+    AVCaptureDeviceFormat *selectedFormat = self.device.formats[formatIndex];
+
+    if ( YES == [self.device lockForConfiguration:NULL] )
+    {
+        self.device.activeFormat = selectedFormat;
+        [self.device unlockForConfiguration];
+    }
+    
+    
+    [self getCurrentActiveFormat:self.device];
+    [self updateCurrentFormatDetails];
+    [self updateLabels];
+    [self updateUISlider];
+}
+
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
     
@@ -254,9 +276,6 @@
     [session addOutput:output];
     
     output.videoSettings = @{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
-    //    [device setActiveVideoMinFrameDuration:CMTimeMake(1, 15)];
-    //    output.minFrameDuration = CMTimeMake(1, 15);
-    
     
     dispatch_queue_t queue = dispatch_queue_create("MyQueue", NULL);
     [output setSampleBufferDelegate:self queue:queue];
@@ -278,30 +297,15 @@
 }
     
 #pragma mark - Actions
+
+- (IBAction)actionSliderChange:(UISlider *)sender {
     
-- (IBAction)changeFormat:(UIButton *)sender {
+    self.currentFPS = sender.value;
+    [self updateLabels];
     
-//    for(AVCaptureDeviceFormat *vFormat in [self.device formats] )
-//    {
-//        CMFormatDescriptionRef description= vFormat.formatDescription;
-//        float maxrate=((AVFrameRateRange*)[vFormat.videoSupportedFrameRateRanges objectAtIndex:0]).maxFrameRate;
-//        
-//        if(maxrate>59 && CMFormatDescriptionGetMediaSubType(description)==kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
-//        {
-//            if ( YES == [self.device lockForConfiguration:NULL] )
-//            {
-//                self.device.activeFormat = vFormat;
-//                [self.device setActiveVideoMinFrameDuration:CMTimeMake(1,50)];
-//                [self.device setActiveVideoMaxFrameDuration:CMTimeMake(1,50)];
-//                [self.device unlockForConfiguration];
-//                NSLog(@"formats  %@ %@ %@",vFormat.mediaType,vFormat.formatDescription,vFormat.videoSupportedFrameRateRanges);
-//            }
-//        }
-//    }
-//    
-//    [self getCurrentActiveFormat:self.device];
+    [self changeFPSValue:self.currentFPS];
+    
 }
-    
     
     
 @end
