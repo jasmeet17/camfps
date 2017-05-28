@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3801A3941EB9092B000527C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801A3931EB9092B000527C3 /* main.m */; };
 		3801A3971EB9092B000527C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801A3961EB9092B000527C3 /* AppDelegate.m */; };
-		3801A39A1EB9092B000527C3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801A3991EB9092B000527C3 /* ViewController.m */; };
 		3801A39D1EB9092B000527C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3801A39B1EB9092B000527C3 /* Main.storyboard */; };
 		3801A39F1EB9092B000527C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3801A39E1EB9092B000527C3 /* Assets.xcassets */; };
 		3801A3A21EB9092B000527C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3801A3A01EB9092B000527C3 /* LaunchScreen.storyboard */; };
@@ -18,6 +17,10 @@
 		3801A3C71EB9094A000527C3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801A3C61EB9094A000527C3 /* AVFoundation.framework */; };
 		3801A3C91EB9094F000527C3 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3801A3C81EB9094F000527C3 /* AVKit.framework */; };
 		3801A3CB1EB91151000527C3 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 3801A3CA1EB91151000527C3 /* README.md */; };
+		3801A3CF1EBA6C00000527C3 /* UseMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801A3CE1EBA6C00000527C3 /* UseMethods.m */; };
+		3801A3D61EC3AE16000527C3 /* FormatDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801A3D51EC3AE16000527C3 /* FormatDetailVC.m */; };
+		3801A3DA1EC3AFC9000527C3 /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801A3D91EC3AFC9000527C3 /* HomeVC.m */; };
+		3801A3DD1EC5AA6D000527C3 /* FormatDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3801A3DC1EC5AA6D000527C3 /* FormatDetailCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,8 +45,6 @@
 		3801A3931EB9092B000527C3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3801A3951EB9092B000527C3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3801A3961EB9092B000527C3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3801A3981EB9092B000527C3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3801A3991EB9092B000527C3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3801A39C1EB9092B000527C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3801A39E1EB9092B000527C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3801A3A11EB9092B000527C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,6 +58,14 @@
 		3801A3C61EB9094A000527C3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3801A3C81EB9094F000527C3 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		3801A3CA1EB91151000527C3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3801A3CD1EBA6C00000527C3 /* UseMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UseMethods.h; sourceTree = "<group>"; };
+		3801A3CE1EBA6C00000527C3 /* UseMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UseMethods.m; sourceTree = "<group>"; };
+		3801A3D41EC3AE16000527C3 /* FormatDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatDetailVC.h; sourceTree = "<group>"; };
+		3801A3D51EC3AE16000527C3 /* FormatDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatDetailVC.m; sourceTree = "<group>"; };
+		3801A3D81EC3AFC9000527C3 /* HomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVC.h; sourceTree = "<group>"; };
+		3801A3D91EC3AFC9000527C3 /* HomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVC.m; sourceTree = "<group>"; };
+		3801A3DB1EC5AA6D000527C3 /* FormatDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FormatDetailCell.h; path = Cell/FormatDetailCell.h; sourceTree = "<group>"; };
+		3801A3DC1EC5AA6D000527C3 /* FormatDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FormatDetailCell.m; path = Cell/FormatDetailCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +99,9 @@
 			isa = PBXGroup;
 			children = (
 				3801A3CA1EB91151000527C3 /* README.md */,
+				3801A3D71EC3AFC9000527C3 /* Home VC */,
+				3801A3D31EC3AE16000527C3 /* Format Detail VC */,
+				3801A3CC1EBA6C00000527C3 /* UseMethods */,
 				3801A3911EB9092B000527C3 /* CamRec */,
 				3801A3AB1EB9092B000527C3 /* CamRecTests */,
 				3801A3B61EB9092B000527C3 /* CamRecUITests */,
@@ -113,8 +125,6 @@
 			children = (
 				3801A3951EB9092B000527C3 /* AppDelegate.h */,
 				3801A3961EB9092B000527C3 /* AppDelegate.m */,
-				3801A3981EB9092B000527C3 /* ViewController.h */,
-				3801A3991EB9092B000527C3 /* ViewController.m */,
 				3801A39B1EB9092B000527C3 /* Main.storyboard */,
 				3801A39E1EB9092B000527C3 /* Assets.xcassets */,
 				3801A3A01EB9092B000527C3 /* LaunchScreen.storyboard */,
@@ -157,6 +167,45 @@
 				3801A3C61EB9094A000527C3 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3801A3CC1EBA6C00000527C3 /* UseMethods */ = {
+			isa = PBXGroup;
+			children = (
+				3801A3CD1EBA6C00000527C3 /* UseMethods.h */,
+				3801A3CE1EBA6C00000527C3 /* UseMethods.m */,
+			);
+			path = UseMethods;
+			sourceTree = "<group>";
+		};
+		3801A3D31EC3AE16000527C3 /* Format Detail VC */ = {
+			isa = PBXGroup;
+			children = (
+				3801A3D41EC3AE16000527C3 /* FormatDetailVC.h */,
+				3801A3D51EC3AE16000527C3 /* FormatDetailVC.m */,
+				3801A3DE1EC5AA73000527C3 /* Format Detail Cell */,
+			);
+			name = "Format Detail VC";
+			path = "VC /Format Detail VC";
+			sourceTree = SOURCE_ROOT;
+		};
+		3801A3D71EC3AFC9000527C3 /* Home VC */ = {
+			isa = PBXGroup;
+			children = (
+				3801A3D81EC3AFC9000527C3 /* HomeVC.h */,
+				3801A3D91EC3AFC9000527C3 /* HomeVC.m */,
+			);
+			name = "Home VC";
+			path = "VC /Home VC";
+			sourceTree = SOURCE_ROOT;
+		};
+		3801A3DE1EC5AA73000527C3 /* Format Detail Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3801A3DB1EC5AA6D000527C3 /* FormatDetailCell.h */,
+				3801A3DC1EC5AA6D000527C3 /* FormatDetailCell.m */,
+			);
+			name = "Format Detail Cell";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,9 +344,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3801A39A1EB9092B000527C3 /* ViewController.m in Sources */,
+				3801A3D61EC3AE16000527C3 /* FormatDetailVC.m in Sources */,
+				3801A3DD1EC5AA6D000527C3 /* FormatDetailCell.m in Sources */,
 				3801A3971EB9092B000527C3 /* AppDelegate.m in Sources */,
 				3801A3CB1EB91151000527C3 /* README.md in Sources */,
+				3801A3DA1EC3AFC9000527C3 /* HomeVC.m in Sources */,
+				3801A3CF1EBA6C00000527C3 /* UseMethods.m in Sources */,
 				3801A3941EB9092B000527C3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,7 +502,7 @@
 				DEVELOPMENT_TEAM = GTG6XQDLW5;
 				INFOPLIST_FILE = CamRec/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = JE.CamRec;
+				PRODUCT_BUNDLE_IDENTIFIER = JE.CamRec1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -462,7 +514,7 @@
 				DEVELOPMENT_TEAM = GTG6XQDLW5;
 				INFOPLIST_FILE = CamRec/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = JE.CamRec;
+				PRODUCT_BUNDLE_IDENTIFIER = JE.CamRec1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
